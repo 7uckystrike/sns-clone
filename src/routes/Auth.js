@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { authService, firebaseinstance } from "../firebase";
+import styled from "@emotion/styled"
+
 
 const Auth = () => {
     const [email, setEmail] = useState("");
@@ -67,24 +69,66 @@ const Auth = () => {
     } 
 
     return(
-        <div>
-            <h1>회원가입</h1>
-            <form onSubmit={onSubmit}>
-                <input name="email" type="email" placeholder="이메일을 입력하세요." required value={email} onChange={onChange}/>
-                {email.length > 0 && <span className={`message ${isEmail ? 'success' : 'error'}`}>{emailMessage}</span>}
+        <Wrapper>
+            <Wrapper__content>
+                <h1>hello, sns</h1>
+                <form onSubmit={onSubmit}>
+                    <input name="email" type="email" placeholder="이메일을 입력하세요." required value={email} onChange={onChange}/>
+                    {email.length > 0 && <span className={`message ${isEmail ? 'success' : 'error'}`}>{emailMessage}</span>}
 
-                <input name="password" type="password" placeholder="비밀번호를 입력하세요." required value={password} onChange={onChange} />
-                {password.length > 0 && <span className={`message ${isPw ? 'success' : 'error'}`}>{pwMessage}</span>}
+                    <input name="password" type="password" placeholder="비밀번호를 입력하세요." required value={password} onChange={onChange} />
+                    {password.length > 0 && <span className={`message ${isPw ? 'success' : 'error'}`}>{pwMessage}</span>}
 
-                <input type="submit" value={newAccount ? '회원가입' : '로그인'} disabled={!(isEmail && isPw)} />
-                {error}
-            </form>
-            <span onClick={toggleAccount}>{newAccount ? '로그인' : '회원가입'}</span>
-            <div>
-                <button name="google" onClick={onSocialClick}>구글</button>
-            </div>
-        </div>
+                    <input type="submit" value={newAccount ? '회원가입' : '로그인'} disabled={!(isEmail && isPw)} />
+                    {error}
+                </form>
+                <span onClick={toggleAccount}>{newAccount ? '로그인' : '회원가입'}</span>
+                <div>
+                    <button name="google" onClick={onSocialClick}>구글</button>
+                </div>
+            </Wrapper__content>
+        </Wrapper>
     )
 }
 
 export default Auth
+
+
+
+// 스타일링
+
+export const Wrapper = styled.div`
+    width: 500px;
+    height: 400px;
+    margin: auto;
+    margin-top: 100px;
+`
+
+export const Wrapper__content = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    h1 {
+        font-family: 'Fugaz One', cursive;
+        font-size: 50px;
+        margin-bottom: 30px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        
+        input {
+            border-bottom: 3px solid #000;
+        }
+
+        span {
+            color: red;
+            font-size: 9px;
+        }
+    }
+`
