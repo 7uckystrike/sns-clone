@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { authService, firebaseinstance } from "../firebase";
-import styled from "@emotion/styled"
+import styled from "@emotion/styled"  
 
 
 const Auth = () => {
@@ -24,10 +24,10 @@ const Auth = () => {
           const emailRegex = /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/
 
             if (!emailRegex.test(e.target.value)) {
-                setEmailMessage('메일 형식을 확인해주세요!')
+                setEmailMessage('★ 메일 형식을 확인해주세요!')
                 setIsEmail(false)
             } else {
-                setEmailMessage('올바른 이메일 형식입니다!')
+                setEmailMessage('👍🏻')
                 setIsEmail(true)
             }
 
@@ -36,14 +36,14 @@ const Auth = () => {
           const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/
 
           if (!passwordRegex.test(e.target.value)) {
-            setPwMessage('숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요!')
+            setPwMessage('★ 숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요!')
             setIsPw(false)
           } else {
-            setPwMessage('안전한 비밀번호에요 : )')
-            setIsPw(true)
+            setPwMessage('👍🏻')
+            setIsPw(true)   
           }
         }
-      }
+      }   
 
     const onSubmit = async(e) => {
         e.preventDefault(); //새로고침 막는거
@@ -72,22 +72,26 @@ const Auth = () => {
         <Wrapper>
             <Wrapper__content>
                 <h1>hello, sns</h1>
-                <form onSubmit={onSubmit}>
-                  <div className="email">
-                  <input id="email" type="email" placeholder="이메일을 입력하세요." required value={email} onChange={onChange}/>
+                <Content__signIn onSubmit={onSubmit}>
+                  <Sign__Email>
+                    <input id="email" type="email" placeholder="이메일을 입력하세요." required value={email} onChange={onChange}/>
                     {email.length > 0 && <span className={`message ${isEmail ? 'success' : 'error'}`}>{emailMessage}</span>}
-                  </div>
-
+                  </Sign__Email>
+                  <Sign__Password>
                     <input id="password" type="password" placeholder="비밀번호를 입력하세요." required value={password} onChange={onChange} />
                     {password.length > 0 && <span className={`message ${isPw ? 'success' : 'error'}`}>{pwMessage}</span>}
-
-                    <input type="submit" value={newAccount ? '회원가입' : '로그인'} disabled={!(isEmail && isPw)} />
-                    {error}
-                </form>
-                <span onClick={toggleAccount}>{newAccount ? '로그인' : '회원가입'}</span>
-                <div>
-                    <button name="google" onClick={onSocialClick}>구글</button>
-                </div>
+                  </Sign__Password>
+                  <Sign__Button>
+                    <input type="submit" value={newAccount ? '회원가입하기' : '로그인하기'} disabled={!(isEmail && isPw)} />
+                    <span className="toggleAccount"onClick={toggleAccount}>{newAccount ? '로그인' : '회원가입'}</span>
+                    <div>
+                      <span className="error">{error}</span>
+                    </div>
+                    </Sign__Button>
+                    <Sign__Google>
+                      <button name="google" onClick={onSocialClick}>구글 입장</button>
+                    </Sign__Google>
+                </Content__signIn>
             </Wrapper__content>
         </Wrapper>
     )
@@ -98,47 +102,98 @@ export default Auth
 
 
 // 스타일링
-
 export const Wrapper = styled.div`
-    width: 500px;
-    height: 400px;
-    margin: auto;
-    margin-top: 100px;
+  width: 100vw;
+  height: 100vh;
+  background-color: #001122; 
 `
 
 export const Wrapper__content = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  padding-top: 150px;
+  padding-left: 150px;
 
-    h1 {
-        font-family: 'Fugaz One', cursive;
-        font-size: 50px;
-        margin-bottom: 30px;
-    }
+  h1 {
+    font-family: 'Fugaz One', cursive;
+    font-size: 60px;
+    color: #00ed64;
+  }
+`
 
-    form {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-        
-        input {
-            border-bottom: 3px solid #000;
-        }
+export const Content__signIn = styled.form`
+  padding-top: 30px;
+  padding-left: 30px;
+`
 
-        span {
-            color: red;
-            font-size: 9px;
-        }
+export const Sign__Email = styled.div`
+  padding-bottom: 20px;
+  
+  input {
+    width: 300px;
+    background-color: transparent;
+    color: #fff;
+    outline: none;
+    padding-left: 2px;
+    padding-bottom: 10px;
+    font-size: 11px;
+    border-bottom: 3px solid #fff;
+  }
 
-        .email {
-          margin-bottom: 30px;
-        }
+  span {
+    font-size: 9px;
+    color: #ff0000;
+    padding-left: 10px;
+  }
+`
 
-        #email {
-          width: 300px;
-        }
-    }
+export const Sign__Password = styled.div`
+  padding-bottom: 20px;
+  
+  input {
+    width: 300px;
+    background-color: transparent;
+    color: #fff;
+    outline: none;
+    padding-left: 2px;
+    padding-bottom: 10px;
+    font-size: 11px;
+    border-bottom: 3px solid #fff;
+  }
+
+  span {
+    font-size: 9px;
+    color: #ff0000;
+    padding-left: 10px;
+  }
+`
+
+export const Sign__Button  = styled.div`
+  input {
+    background-color: transparent;
+    border: 3px solid #00ed64;
+    color: #00ed64;
+    margin-right: 10px;
+  }
+
+  .toggleAccount {
+    background-color: transparent;
+    border: 3px solid #fff;
+    color: #fff;
+    padding: 0 10px;
+    margin-right: 10px;
+  }
+
+  .error {
+    display: block;
+    font-size: 9px;
+    color: #ff0000;
+    margin: 10px 0;
+  }
+`
+
+export const Sign__Google = styled.div`
+  button {
+    background-color: transparent;
+    color: #fff;
+    border-bottom: 3px solid #fff;
+  }
 `
