@@ -4,6 +4,7 @@ import { ref, uploadString, getDownloadURL } from 'firebase/storage'
 import { addDoc, collection } from "firebase/firestore";
 import { v4 as uuidv4 } from 'uuid'
 import Nweet from "../components/Nweet";
+import styled from "@emotion/styled"  
 
 const Home = ({ userObj }) => {
     const [text, setText] = useState("")
@@ -62,7 +63,7 @@ const Home = ({ userObj }) => {
     const onFileClickClear = () => setImgFile(null)
 
     return(
-        <div>
+        <Wrapper>
             <h1>메인화면</h1>
             <form>
                 <input type="text" placeholder="적으세요" maxLength={120} value={text} onChange={onChange}/>
@@ -82,8 +83,17 @@ const Home = ({ userObj }) => {
                            userId={userObj.uid}
                            userName={uitext.creatorName}/>   
             ))}
-        </div>
+        </Wrapper>
     )
 }
 
 export default Home
+
+
+// 스타일링
+export const Wrapper = styled.div`
+  width: 100vw;
+  height: 100vh;
+  background-color: #fff; 
+
+`

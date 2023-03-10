@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
+import styled from "@emotion/styled";
 
 const Navigation = ({userObj}) => {
     return (
-        <div>
-            <h1>프로필영역</h1>
+        <Wrapper>
             <ul> 
                 <li>
                     <Link to="/">
@@ -16,8 +16,16 @@ const Navigation = ({userObj}) => {
                     </Link>
                 </li>
             </ul>
-        </div>
+        </Wrapper>
     )
 }
 
 export default Navigation
+
+//스타일링
+
+export const Wrapper = styled.div`
+  width: 100vw;
+  background-color: #001122;
+  color: #fff; 
+`
