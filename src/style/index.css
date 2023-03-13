@@ -35,4 +35,20 @@
     width: 100vw;
     height: 100vh;
   }
+
+  ul, li {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
   
+  a {
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  a:hover,
+  a:focus {
+    color: #00ed64;
+  }

@@ -64,18 +64,19 @@ const Home = ({ userObj }) => {
 
     return(
         <Wrapper>
-            <h1>메인화면</h1>
-            <form>
-                <input type="text" placeholder="적으세요" maxLength={120} value={text} onChange={onChange}/>
-                <input type="submit" value="Click" onClick={onSubmit} />
-                <input type="file" accept="image/*" onChange={onFileChange} />
-                { imgFile && (
-                    <div>
-                        <img src={imgFile} width="50px" height="50px" alt="upload img"/>    
-                        <button onClick={onFileClickClear}>Clear</button>
-                    </div> 
-                )}
-            </form>
+            <Wrapper__form>
+                <input className="input_text" type="text" placeholder="무슨 일이 있었나요?" maxLength={120} value={text} onChange={onChange}/>
+                <input className="input_submit" type="submit" value="등록" onClick={onSubmit} />
+                <Wrapper__img>
+                  <input type="file" accept="image/*" onChange={onFileChange} />
+                  { imgFile && (
+                      <div>
+                          <img src={imgFile} width="50px" height="50px" alt="upload img"/>    
+                          <button onClick={onFileClickClear}>삭제</button>
+                      </div> 
+                  )}
+                </Wrapper__img>
+            </Wrapper__form>
             {uiText.map((uitext) => (
                     <Nweet key={uitext.id}
                            nweetObj={uitext}
@@ -95,5 +96,32 @@ export const Wrapper = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: #fff; 
+  margin: 40px;
 
+`
+
+export const Wrapper__form = styled.form`
+  .input_text {
+    width: 500px;
+    background-color: transparent;
+    padding-left: 5px;
+    padding-bottom: 10px;
+    font-size: 11px;
+    border-bottom: 3px solid #000;
+  }
+
+  .input_submit {
+    width: 55px;
+    height: 50px;
+    border: 3px solid #000;
+    margin-left: 15px;
+    background-color: transparent;
+  }
+`
+
+export const Wrapper__img = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
 `
