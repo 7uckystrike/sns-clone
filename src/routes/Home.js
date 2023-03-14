@@ -1,15 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { dbService, storageService } from "../firebase";
 import { ref, uploadString, getDownloadURL } from 'firebase/storage'
 import { addDoc, collection } from "firebase/firestore";
+import { FaCameraRetro, FaPencilAlt } from 'react-icons/fa';
 import { v4 as uuidv4 } from 'uuid'
 import Nweet from "../components/Nweet";
 import styled from "@emotion/styled"  
+
 
 const Home = ({ userObj }) => {
     const [text, setText] = useState("")
     const [uiText, setUiText] = useState([]);
     const [imgFile, setImgFile] = useState("")
+
+    const fileInput = useRef();
 
     // console.log(uiText)
 
@@ -66,24 +70,28 @@ const Home = ({ userObj }) => {
         <Wrapper>
             <Wrapper__form>
                 <input className="input_text" type="text" placeholder="무슨 일이 있었나요?" maxLength={120} value={text} onChange={onChange}/>
-                <input className="input_submit" type="submit" value="등록" onClick={onSubmit} />
-                <Wrapper__img>
-                  <input type="file" accept="image/*" onChange={onFileChange} />
-                  { imgFile && (
-                      <div>
-                          <img src={imgFile} width="50px" height="50px" alt="upload img"/>    
-                          <button onClick={onFileClickClear}>삭제</button>
-                      </div> 
-                  )}
-                </Wrapper__img>
+                <div className="form__file">
+                  <label htmlFor="file-input" className="file-input"><FaCameraRetro /></label>
+                  <input id="file-input" ref={fileInput} type="file" accept="image/*" onChange={onFileChange} style={{display:"none"}} />
+                  <button className="submit-input" type="submit" onClick={onSubmit}><FaPencilAlt/></button>
+                </div>
+                
+                { imgFile && (
+                    <div className="file_img">
+                      <img src={imgFile} width="400px" height="auto" alt="upload" className="img"/>    
+                      <button onClick={onFileClickClear} className="button">삭제</button>
+                    </div> 
+                )}
             </Wrapper__form>
-            {uiText.map((uitext) => (
-                    <Nweet key={uitext.id}
-                           nweetObj={uitext}
-                           isOwner={uitext.creatorId === userObj.uid}
-                           userId={userObj.uid}
-                           userName={uitext.creatorName}/>   
-            ))}
+            <div>
+              {uiText.map((uitext) => (
+                      <Nweet key={uitext.id}
+                            nweetObj={uitext}
+                            isOwner={uitext.creatorId === userObj.uid}
+                            userId={userObj.uid}
+                            userName={uitext.creatorName}/>   
+              ))}
+            </div>
         </Wrapper>
     )
 }
@@ -96,32 +104,55 @@ export const Wrapper = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: #fff; 
-  margin: 40px;
-
+  margin: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
 `
 
 export const Wrapper__form = styled.form`
+  width: 500px;
+  height: 200px;
+  margin-bottom: 10px;
+
   .input_text {
-    width: 500px;
-    background-color: transparent;
-    padding-left: 5px;
-    padding-bottom: 10px;
-    font-size: 11px;
-    border-bottom: 3px solid #000;
-  }
-
-  .input_submit {
-    width: 55px;
+    font-size: 13px;
+    width: 400px;
     height: 50px;
+    border: 1px solid #999;
+    padding-left: 10px;
+    margin-bottom: 10px;
+  }
+
+  .form__file {
+    width: 400px;
+    text-align: right;
+    margin-bottom: 20px;
+  }
+
+  .file-input {
+    margin-right: 10px;
+    cursor: pointer;
+  }
+
+  .submit-input {
+    background-color: transparent;
+    cursor: pointer;
+  }
+
+  .file_img {
+    width: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .img {
+    margin-bottom: 10px;
+  }
+  
+  .button {
     border: 3px solid #000;
-    margin-left: 15px;
     background-color: transparent;
   }
-`
-
-export const Wrapper__img = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
 `
