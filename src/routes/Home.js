@@ -83,7 +83,6 @@ const Home = ({ userObj }) => {
                     </div> 
                 )}
             </Wrapper__form>
-            <div>
               {uiText.map((uitext) => (
                       <Nweet key={uitext.id}
                             nweetObj={uitext}
@@ -91,7 +90,6 @@ const Home = ({ userObj }) => {
                             userId={userObj.uid}
                             userName={uitext.creatorName}/>   
               ))}
-            </div>
         </Wrapper>
     )
 }
