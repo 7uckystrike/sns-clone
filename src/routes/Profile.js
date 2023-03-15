@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { authService, dbService } from "../firebase";
 import { updateProfile } from '@firebase/auth';
 import { collection, orderBy, query, where, getDocs, updateDoc, doc} from "firebase/firestore"
+import { useNavigate } from "react-router-dom";
 import Nweet from "../components/Nweet";
-import EditProfile from "../components/EditProfile";
 
 const Profile = ({ userObj, refreshUser }) => {
     const [userText, setUserText] = useState([]);
@@ -32,6 +32,13 @@ const Profile = ({ userObj, refreshUser }) => {
         })
     },[])
 
+    const navigator = useNavigate();
+
+    const onLogOutClick = () => {
+        authService.signOut();
+        navigator("/");
+    }
+
     //프로필 수정
     const onSubmit = async(e) => {
         e.preventDefault();
@@ -55,16 +62,18 @@ const Profile = ({ userObj, refreshUser }) => {
 
     return (
         <div>
-            <form onClick={onSubmit}>
-                <input type="text" value={newUserName} onChange={onChange} />
-                <button type="submit">업데이트</button>
-            </form>
-            <EditProfile />
-            {userText.map((usertxt) => (
-                <Nweet key={usertxt.id}
-                       nweetObj = {usertxt}
-                       userName = {usertxt.creatorName} />
-            ))}
+          <div>
+            <button onClick={onLogOutClick}>로그아웃</button> 
+          </div>
+          <form onClick={onSubmit}>
+              <input type="text" value={newUserName} onChange={onChange} />
+              <button type="submit">업데이트</button>
+          </form>
+          {userText.map((usertxt) => (
+            <Nweet key={usertxt.id}
+              nweetObj = {usertxt}
+              userName = {usertxt.creatorName} />
+          ))}
         </div>
     )
 }
