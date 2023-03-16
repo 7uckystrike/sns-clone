@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { authService } from "../firebase";
 import AppRouter from "./AppRouter";
 
+
 const App = () => {
   const [init, setInit] = useState(false)
   const [isLoggendIn, setIsLoggendIn] = useState(false)
@@ -32,8 +33,7 @@ const App = () => {
 
   return (
     <>
-      {init ? <AppRouter isLoggendIn={isLoggendIn} userObj={userObj} refreshUser={refreshUser}/> : '로그인중입니다'}
-      <footer>&copy; SNS {new Date().getFullYear()} Jyoung</footer>
+      {init ? <AppRouter isLoggendIn={isLoggendIn} userObj={userObj} refreshUser={refreshUser}/> : ''}
     </>
   )
 }

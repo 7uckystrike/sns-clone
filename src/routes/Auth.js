@@ -93,6 +93,9 @@ const Auth = () => {
                     </Sign__Google>
                 </Content__signIn>
             </Wrapper__content>
+            <Wrapper__footer>
+              &copy; SNS {new Date().getFullYear()} Jyoung
+            </Wrapper__footer>
         </Wrapper>
     )
 }
@@ -196,4 +199,10 @@ export const Sign__Google = styled.div`
     color: #fff;
     border-bottom: 3px solid #fff;
   }
+`
+
+export const Wrapper__footer = styled.div`
+  padding-top: 150px;
+  padding-left: 150px;
+  color: #fff;
 `
