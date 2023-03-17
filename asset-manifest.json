@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/sns-clone/static/css/main.cc7b6062.css",
+    "main.js": "/sns-clone/static/js/main.f119d48e.js",
+    "index.html": "/sns-clone/index.html",
+    "main.cc7b6062.css.map": "/sns-clone/static/css/main.cc7b6062.css.map",
+    "main.f119d48e.js.map": "/sns-clone/static/js/main.f119d48e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.cc7b6062.css",
+    "static/js/main.f119d48e.js"
+  ]
+}
