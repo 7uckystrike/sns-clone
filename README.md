@@ -3,7 +3,7 @@
 <br />
 
 ### Demo
-
+http://7uckystrike.github.io/sns-clone/
 
 <br />
 
