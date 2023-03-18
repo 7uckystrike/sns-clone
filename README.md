@@ -27,3 +27,8 @@
 <br />
 
 ### Preview
+<img src="https://github.com/7uckystrike/sns-clone/blob/main/preview/main.png?raw=true" />
+<br />
+<img src="https://github.com/7uckystrike/sns-clone/blob/main/preview/home.png?raw=true" />
+<br />
+<img src="https://github.com/7uckystrike/sns-clone/blob/main/preview/profile.png?raw=true" />
