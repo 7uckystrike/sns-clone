@@ -103,11 +103,10 @@ export default Home
 export const Wrapper = styled.div`
   width: 100vw;
   height: 100vh;
-  background-color: #fff; 
-  margin: 50px;
   display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `
 
 export const Wrapper__form = styled.form`

@@ -4,6 +4,7 @@ import { doc, deleteDoc }from "firebase/firestore";
 import { deleteObject, ref } from "firebase/storage";
 import styled from "@emotion/styled"
 
+
 const Nweet = ({ nweetObj, isOwner, userName }) => {
     const [edit, setEdit] = useState(false); //수정할건지 말건지에 관한 토글
     const [newText, setNewText] = useState(nweetObj.twt)
@@ -55,6 +56,8 @@ const Nweet = ({ nweetObj, isOwner, userName }) => {
     //수정토글
     const toggleEdit = () => {setEdit((prev) => !prev)};
 
+  
+
     return(
         <Wrapper>
             {edit ? 
@@ -70,14 +73,14 @@ const Nweet = ({ nweetObj, isOwner, userName }) => {
                     <Wrapper__twt>
                         <p className="twt">{nweetObj.twt}</p>   
                         <div>
-                        {nweetObj.imgFileURL && <img src={nweetObj.imgFileURL} width="400px" height="auto" alt="UI URL" />}    
+                        {nweetObj.imgFileURL && <img src={nweetObj.imgFileURL} width="400px" height="auto" alt="UI URL" />}   
                         </div>                     
                         <div className="twt-info">
                           <div className="btn">
                             {isOwner && (
                             <>
                                 <button type="submit" onClick={onDelClick}>삭제</button>
-                                <button type="submit" onClick={toggleEdit}>수정</button>
+                                <button type="submit" onClick={toggleEdit}>수정</button> 
                             </>
                             )}  
                           </div>
